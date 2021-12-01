@@ -1,11 +1,7 @@
 import Data.List (tails);
 
-windows n xs = map (take n) (tails xs)
-
-doubleGreater :: [Int] -> Int
-doubleGreater [a, b] = if b > a then 1 else 0
-doubleGreater _ = 0
+windows n xs = take (length xs - n + 1) $ map (take n) (tails xs)
 
 main = interact $ \input ->
-  -- show . sum . map doubleGreater . windows 2 . map read $ lines input
-  show . sum . map doubleGreater . windows 2 . map sum . windows 3 . map read $ lines input
+  -- show . length . filter (\[a, b] -> b > a) . windows 2 . map (\i -> read i :: Int) $ lines input
+  show . length . filter (\[a, b] -> b > a) . windows 2 . map sum . windows 3 . map read $ lines input
