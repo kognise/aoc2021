@@ -8,12 +8,11 @@ binFreqs nums = (verticalSum nums, verticalSum $ map (map (1 -)) nums)
 compBin comp ([one], [zero]) = [ if one `comp` zero then 1 else 0 ]
 compBin comp (one:ones, zero:zeroes) = (if one `comp` zero then 1 else 0) : compBin comp (ones, zeroes)
 
-calcRatingHelper comp [num] i = num
-calcRatingHelper comp nums i =
-  calcRatingHelper comp remaining (i + 1)
-  where req = compBin comp (binFreqs nums) !! i
-        remaining = filter (\num -> num !! i == req) nums
-calcRating comp nums = calcRatingHelper comp nums 0
+calcRating comp [num] = num
+calcRating comp nums =
+  req : calcRating comp remaining
+  where req = head $ compBin comp (binFreqs nums)
+        remaining = map tail $ filter (\num -> head num == req) nums
 
 main = interact $ \input -> do
   let nums = map parseBin $ lines input
