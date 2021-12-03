@@ -12,7 +12,7 @@ calcRating comp [num] = num
 calcRating comp nums =
   req : calcRating comp remaining
   where req = head $ compBin comp (binFreqs nums)
-        remaining = map tail $ filter (\num -> head num == req) nums
+        remaining = map tail $ filter ((== req) . head) nums
 
 main = interact $ \input -> do
   let nums = map parseBin $ lines input
