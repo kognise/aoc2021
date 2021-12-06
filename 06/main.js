@@ -1,0 +1,22 @@
+const text = require('fs').readFileSync('input.txt').toString()
+const startState = text.split(',').map(Number)
+
+let state = {}
+for (const num of startState) {
+	state[num] = state[num] ? state[num] + 1 : 1
+}
+
+for (let i = 0; i < 256; i++) {
+	const newState = {}
+	for (const [ key, count ] of Object.entries(state)) {
+		const num = parseInt(key)
+		if (num === 0) {
+			newState[8] = newState[8] ? newState[8] + count : count
+			newState[6] = newState[6] ? newState[6] + count : count
+		} else {
+			newState[num - 1] = newState[num -1] ? newState[num - 1] + count : count
+		}
+	}
+	state = newState
+}
+console.log(Object.values(state).reduce((a, b) => a + b))
