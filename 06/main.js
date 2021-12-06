@@ -11,10 +11,10 @@ for (let i = 0; i < 256; i++) {
 	for (const [ key, count ] of Object.entries(state)) {
 		const num = parseInt(key)
 		if (num === 0) {
-			newState[8] = newState[8] ? newState[8] + count : count
-			newState[6] = newState[6] ? newState[6] + count : count
+			newState[8] = count
+			newState[6] = count
 		} else {
-			newState[num - 1] = newState[num -1] ? newState[num - 1] + count : count
+			newState[num - 1] = (newState[num -1] ?? 0) + count
 		}
 	}
 	state = newState
