@@ -3,7 +3,7 @@ const startState = text.split(',').map(Number)
 
 let state = {}
 for (const num of startState) {
-	state[num] = state[num] ? state[num] + 1 : 1
+	state[num] = (state[num] ?? 0) + 1
 }
 
 for (let i = 0; i < 256; i++) {
@@ -14,7 +14,7 @@ for (let i = 0; i < 256; i++) {
 			newState[8] = count
 			newState[6] = count
 		} else {
-			newState[num - 1] = (newState[num -1] ?? 0) + count
+			newState[num - 1] = (newState[num - 1] ?? 0) + count
 		}
 	}
 	state = newState
