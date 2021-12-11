@@ -5,7 +5,7 @@ const countPositions = (numbers) => {
     for (const number of numbers) {
         for (let i = 0; i < number.length; i++) {
             if (!positions[i]) positions[i] = {}
-            positions[i][number[i]] = positions[i][number[i]] ? positions[i][number[i]] + 1 : 1
+            positions[i][number[i]] = (positions[i][number[i]] ?? 0) + 1
         }
     }
     return positions
